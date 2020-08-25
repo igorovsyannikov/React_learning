@@ -12,7 +12,7 @@ function App() {
       <NavBar/>
       <Menu/>
         <div className="App">
-          <h1>Hello mth react</h1>
+          <h1>Hello react</h1>
         </div>
     </>
   );
