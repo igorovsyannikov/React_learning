@@ -40,7 +40,7 @@ ul {
 }
 
 h1, h2, h3  {
-  font-family: Pacifico;
+  font-family: 'Pacifico';
   padding: 0;
   margin: 0;
 }

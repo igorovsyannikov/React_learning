@@ -4,9 +4,10 @@ import BannerImg from '../image/banner.png';
 
 const BannerWrapper = styled.div`
     width: 100%;
-    height: 155px;
+    height: 200px;
     background: url(${BannerImg});
     background-size: cover;
+    background-position: center;
 `;
 
 export const Banner = () => (
