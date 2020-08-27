@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from  'styled-components';
+import {ButtonCheckout} from './Button';
 
 const Overlay = styled.div`
     display: flex;
@@ -11,7 +12,7 @@ const Overlay = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,.5);
-    z-index: 20;
+    z-index: 90;
 `;
 const Modal = styled.div`
     background-color: #fff;
@@ -28,29 +29,14 @@ const Banner = styled.div`
     width: 100%;
 `;
 const TextWrapper = styled.div`
-    font-family: Pacifico;
+    font-family: Pacifico, curdive;
     font-size: 30px;
     display: flex;
     justify-content: space-between;
     padding: 0 37px;
+    height: calc(100% - 300px);
 `;
-const Button = styled.button`
-    width: 250px;
-    height: 65px;
-    background: #299B01;
-    font-size: 21px;
-    line-height: 65px;
-    color: #fff;
-    border: none;
-    outline: none;
-    position: absolute;
-    bottom: 43px;
-    left: 50%;
-    transform: translateX(-50%);
-    &:hover {
-        opacity: .8;
-    }
-`;
+
 
 
 export const ModalItem = ({openItem, setOpenItem}) => {
@@ -75,7 +61,7 @@ export const ModalItem = ({openItem, setOpenItem}) => {
                 {style: 'currency', currency: 'RUB'})}
             </div>
         </TextWrapper>
-        <Button>Добавить</Button>
+        <ButtonCheckout>Добавить</ButtonCheckout>
         </Modal>
     </Overlay>
     )
