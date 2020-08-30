@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from  'styled-components';
-import {ButtonCheckout} from './Button';
+import {ButtonCheckout} from '../Button';
 
 const Overlay = styled.div`
     display: flex;
@@ -39,15 +39,23 @@ const TextWrapper = styled.div`
 
 
 
-export const ModalItem = ({openItem, setOpenItem}) => {
-    
+export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
+
     function closeModal(e) {
         if (e.target.id === 'overlay') {
             setOpenItem(null);
         }
     }
 
-    if (!openItem) return null;
+    const order = {
+        ...openItem
+    };
+
+    const addToOrder = () => {
+        setOrders([...orders, order])
+        setOpenItem(null);
+    }
+
     return (
         <Overlay id="overlay" onClick={closeModal}>
         <Modal>
@@ -61,7 +69,7 @@ export const ModalItem = ({openItem, setOpenItem}) => {
                 {style: 'currency', currency: 'RUB'})}
             </div>
         </TextWrapper>
-        <ButtonCheckout>Добавить</ButtonCheckout>
+        <ButtonCheckout onClick={addToOrder} >Добавить</ButtonCheckout>
         </Modal>
     </Overlay>
     )

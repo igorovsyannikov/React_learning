@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from  'styled-components';
-import logoImg from '../image/logo.svg';
-import userIcon from '../image/sign.svg'
+import logoImg from '../../image/logo.svg';
+import userIcon from '../../image/sign.svg'
 
 const NavbarStyled = styled.header`
     position: fixed;
@@ -9,7 +9,7 @@ const NavbarStyled = styled.header`
     left: 0;
     z-index: 999;
     height: 80px;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 15px;
