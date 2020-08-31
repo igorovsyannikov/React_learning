@@ -35,7 +35,7 @@ ul {
   margin: 0;
 }
 h1, h2, h3  {
-  font-family: 'Pacifico';
+  font: 'Pacifico', cursive;
   padding: 0;
   margin: 0;
 }
@@ -46,6 +46,18 @@ p {
 button {
   cursor: pointer;
 }
+
+
 //CSS reset to here
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type='number'] {
+-moz-appearance: textfield;
+
+}
 
 `;

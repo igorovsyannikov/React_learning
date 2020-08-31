@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from  'styled-components';
 import {ButtonCheckout} from '../Button';
+import {CountItem} from "./CountItem";
+import {useCount} from "../hooks/useCount"
+import {Currency} from '../Functions/secondaryFunctions';
+import {totalPriceItems} from '../Functions/secondaryFunctions';
 
 const Overlay = styled.div`
     display: flex;
@@ -13,12 +17,14 @@ const Overlay = styled.div`
     height: 100%;
     background-color: rgba(0,0,0,.5);
     z-index: 90;
+
 `;
 const Modal = styled.div`
     background-color: #fff;
     width: 600px;
     height: 600px;
     position: relative;
+            
 `;
 const Banner = styled.div`
     height: 200px;
@@ -29,27 +35,35 @@ const Banner = styled.div`
     width: 100%;
 `;
 const TextWrapper = styled.div`
-    font-family: Pacifico, curdive;
-    font-size: 30px;
+    font-family: Pacifico, cursive;
+    font-size: 30px; 
     display: flex;
     justify-content: space-between;
-    padding: 0 37px;
-    height: calc(100% - 300px);
+`;
+const HeaderContent = styled.div`
+  height: calc(100% - 300px);
+  padding: 0 37px;
+`;
+const TotalPriceItem = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 
-
 export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
+
+    const counter = useCount();
 
     function closeModal(e) {
         if (e.target.id === 'overlay') {
             setOpenItem(null);
         }
     }
-
     const order = {
-        ...openItem
+        ...openItem,
+        count: counter.count
     };
+
 
     const addToOrder = () => {
         setOrders([...orders, order])
@@ -59,17 +73,23 @@ export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
     return (
         <Overlay id="overlay" onClick={closeModal}>
         <Modal>
-        <Banner img={openItem.img}/>
-        <TextWrapper>
-             <div>
-                {openItem.name}
-            </div>
-            <div>
-                {openItem.price.toLocaleString('ru-RU',
-                {style: 'currency', currency: 'RUB'})}
-            </div>
-        </TextWrapper>
-        <ButtonCheckout onClick={addToOrder} >Добавить</ButtonCheckout>
+            <Banner img={openItem.img}/>
+            <HeaderContent>
+                <TextWrapper>
+                    <div>
+                        {openItem.name}
+                    </div>
+                    <div>
+                        {Currency(openItem.price)}
+                    </div>
+                </TextWrapper>
+                <CountItem {...counter}/>
+                <TotalPriceItem>
+                    <span>Цена:</span>
+                    <span>{Currency(totalPriceItems(order))}</span>
+                </TotalPriceItem>
+            </HeaderContent>
+            <ButtonCheckout onClick={addToOrder} >Добавить</ButtonCheckout>
         </Modal>
     </Overlay>
     )
