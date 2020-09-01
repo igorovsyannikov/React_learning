@@ -5,6 +5,8 @@ import {CountItem} from "./CountItem";
 import {useCount} from "../hooks/useCount"
 import {Currency} from '../Functions/secondaryFunctions';
 import {totalPriceItems} from '../Functions/secondaryFunctions';
+import {Toppings} from "./Toppings";
+import {useToppings} from "../hooks/useTopping";
 
 const Overlay = styled.div`
     display: flex;
@@ -41,8 +43,11 @@ const TextWrapper = styled.div`
     justify-content: space-between;
 `;
 const HeaderContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   height: calc(100% - 300px);
-  padding: 0 37px;
+  padding: 0 37px 20px;
 `;
 const TotalPriceItem = styled.div`
   display: flex;
@@ -53,6 +58,8 @@ const TotalPriceItem = styled.div`
 export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
 
     const counter = useCount();
+    const toppings = useToppings(openItem);
+
 
     function closeModal(e) {
         if (e.target.id === 'overlay') {
@@ -61,12 +68,14 @@ export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
     }
     const order = {
         ...openItem,
-        count: counter.count
+        count: counter.count,
+        topping: toppings.toppings
     };
 
 
     const addToOrder = () => {
         setOrders([...orders, order])
+
         setOpenItem(null);
     }
 
@@ -84,6 +93,7 @@ export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
                     </div>
                 </TextWrapper>
                 <CountItem {...counter}/>
+                {openItem.toppings && <Toppings {...toppings}/>}
                 <TotalPriceItem>
                     <span>Цена:</span>
                     <span>{Currency(totalPriceItems(order))}</span>

@@ -49,7 +49,8 @@ const EmptyList = styled.p`
 
 export const Order = ({ orders }) => {
 
-    const total = orders.reduce((result, order)=> totalPriceItems(order)+result, 0)
+    const total = orders.reduce((result, order)=> totalPriceItems(order)+result, 0);
+    const totalCounter = orders.reduce((result, order)=> order.count+result, 0);
 
     return (
         <OrderStyled>
@@ -64,7 +65,7 @@ export const Order = ({ orders }) => {
             </OrderContent>
             <Total>
                 <span>Итого</span>
-                <span>1</span>
+                <span>{totalCounter}</span>
                 <TotalPrice>{Currency(total)}</TotalPrice>
             </Total>
             <ButtonCheckout>ОФОРМИТЬ</ButtonCheckout>

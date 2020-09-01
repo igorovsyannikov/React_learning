@@ -31,6 +31,7 @@ const ItemPrice = styled.span`
 export const OrderListItem = ({order}) => (
     <OrederItemStyled>
         <ItemName>{order.name}</ItemName>
+        <ItemPrice>{order.count}</ItemPrice>
         <ItemPrice>{Currency(totalPriceItems(order))}</ItemPrice>
         <TrashButton/>
     </OrederItemStyled>
