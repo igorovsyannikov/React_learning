@@ -16,6 +16,7 @@ const OrderStyled = styled.section`
     padding: 20px; 
     display: flex;
     flex-direction: column;
+    z-index: 90;
 `;
 const OrderTitle = styled.h2`
     text-align: center;
@@ -59,7 +60,7 @@ export const Order = ({ orders }) => {
             <OrderContent>
                 { orders.length ?
                     <OrderList>
-                        {orders.map(order => <OrderListItem order={order}/>)}
+                        {orders.map(item => <OrderListItem order={item}/>)}
                     </OrderList> :
                     <EmptyList>Список заказов пуст</EmptyList>}
             </OrderContent>

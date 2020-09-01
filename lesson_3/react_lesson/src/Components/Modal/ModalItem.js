@@ -69,13 +69,12 @@ export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
     const order = {
         ...openItem,
         count: counter.count,
-        topping: toppings.toppings
+        toppings: toppings.toppings
     };
 
 
     const addToOrder = () => {
         setOrders([...orders, order])
-
         setOpenItem(null);
     }
 
