@@ -48,10 +48,26 @@ const EmptyList = styled.p`
   text-align: center;
 `;
 
-export const Order = ({ orders }) => {
+export const Order = ({ orders, setOrders }) => {
 
     const total = orders.reduce((result, order)=> totalPriceItems(order)+result, 0);
     const totalCounter = orders.reduce((result, order)=> order.count+result, 0);
+
+    function deleteOrderItem(e) {
+        //Plan B: e.target.parentElement.remove();
+        let ulList = e.target.parentElement.parentElement;
+        let clickList = e.target.parentElement;
+        function indexCounter() {
+            for (let i=0; i<ulList.children.length;i++) {
+                if (clickList === ulList.children[i]) {
+                    return i;
+                }
+            }
+        }
+        const index = indexCounter();
+        setOrders(orders.filter(item => item !== orders[index]));
+
+    }
 
     return (
         <OrderStyled>
@@ -60,7 +76,7 @@ export const Order = ({ orders }) => {
             <OrderContent>
                 { orders.length ?
                     <OrderList>
-                        {orders.map(item => <OrderListItem order={item}/>)}
+                        {orders.map(item => <OrderListItem deleteOrderItem={deleteOrderItem} order={item}/>)}
                     </OrderList> :
                     <EmptyList>Список заказов пуст</EmptyList>}
             </OrderContent>
@@ -69,7 +85,7 @@ export const Order = ({ orders }) => {
                 <span>{totalCounter}</span>
                 <TotalPrice>{Currency(total)}</TotalPrice>
             </Total>
-            <ButtonCheckout>ОФОРМИТЬ</ButtonCheckout>
+            <ButtonCheckout >ОФОРМИТЬ</ButtonCheckout>
         </OrderStyled>
     )
 }

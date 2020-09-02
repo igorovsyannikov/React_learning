@@ -35,20 +35,24 @@ const ToppinghWrapper = styled.div`
   color: #9A9A9A;
 `;
 
-export const OrderListItem = ({order}) => (
-    <OrederItemStyled>
-        <ItemName>
-            {order.name}
-            <ToppinghWrapper>
-                    {order.toppings.map(item => {
-                            if (item.checked) {
-                                    return ( <span> {item.name} </span>)
-                            }
-                    })}
-            </ToppinghWrapper>
-        </ItemName>
-        <ItemPrice>{order.count}</ItemPrice>
-        <ItemPrice>{Currency(totalPriceItems(order))}</ItemPrice>
-        <TrashButton/>
-    </OrederItemStyled>
-)
+export const OrderListItem = ({order, setOrders, deleteOrderItem}) => {
+
+    const checkedToppings = order.toppings.filter(item => item.checked).map(item => item.name).join(', ')
+
+
+    return (
+        <OrederItemStyled>
+            <ItemName>
+                {order.name}
+                {order.choices3}
+                {checkedToppings && <ToppinghWrapper>
+                    Допы:
+                    {checkedToppings}
+                </ToppinghWrapper> }
+            </ItemName>
+            <ItemPrice>{order.count}</ItemPrice>
+            <ItemPrice>{Currency(totalPriceItems(order))}</ItemPrice>
+            <TrashButton onClick={deleteOrderItem} />
+        </OrederItemStyled>
+    )
+}

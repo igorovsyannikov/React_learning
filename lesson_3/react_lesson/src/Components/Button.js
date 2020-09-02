@@ -16,4 +16,7 @@ export const ButtonCheckout = styled.button`
     &:hover {
         opacity: .8;
     }
+    &:disabled {
+      filter: grayscale(1);
+    }
 `;
