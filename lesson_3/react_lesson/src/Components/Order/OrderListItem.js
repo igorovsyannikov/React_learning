@@ -37,7 +37,7 @@ const ToppingWrapper = styled.div`
 
 export const OrderListItem = ({order, index, deleteOrderItem, setOpenItem }) => {
 
-    const checkedToppings = order.topping.filter(item => item.checked).map(item => item.name).join(', ')
+    const checkedToppings = order.topping2.filter(item => item.checked).map(item => item.name).join(', ')
 
     return (
         <OrederItemStyled>
