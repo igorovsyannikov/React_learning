@@ -29,7 +29,7 @@ const ItemPrice = styled.span`
     min-width: 65px;
     text-align: right;
 `;
-const ToppinghWrapper = styled.div`
+const ToppingWrapper = styled.div`
   font-size: 14px;
   line-height: 16px;
   color: #9A9A9A;
@@ -37,18 +37,17 @@ const ToppinghWrapper = styled.div`
 
 export const OrderListItem = ({order, index, deleteOrderItem, setOpenItem }) => {
 
-    const checkedToppings = order.toppings.filter(item => item.checked).map(item => item.name).join(', ')
-
+    const checkedToppings = order.topping.filter(item => item.checked).map(item => item.name).join(', ')
 
     return (
-        <OrederItemStyled onClick={() => setOpenItem({...order, index})}>
-            <ItemName>
+        <OrederItemStyled>
+            <ItemName onClick={() => setOpenItem({...order, index})}>
                 {order.name}
                 {order.choices3}
-                {checkedToppings && <ToppinghWrapper>
+                {checkedToppings && <ToppingWrapper>
                     Допы:
                     {checkedToppings}
-                </ToppinghWrapper> }
+                </ToppingWrapper> }
             </ItemName>
             <ItemPrice>{order.count}</ItemPrice>
             <ItemPrice>{Currency(totalPriceItems(order))}</ItemPrice>

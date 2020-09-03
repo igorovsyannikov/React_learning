@@ -72,7 +72,7 @@ export const ModalItem = ({openItem, setOpenItem, orders, setOrders}) => {
     const order = {
         ...openItem,
         count: counter.count,
-        toppings: toppings.toppings,
+        topping: toppings.toppings,
         choices3: choices2.choice,
     };
 
