@@ -35,13 +35,13 @@ const ToppinghWrapper = styled.div`
   color: #9A9A9A;
 `;
 
-export const OrderListItem = ({order, setOrders, deleteOrderItem}) => {
+export const OrderListItem = ({order, index, deleteOrderItem, setOpenItem }) => {
 
     const checkedToppings = order.toppings.filter(item => item.checked).map(item => item.name).join(', ')
 
 
     return (
-        <OrederItemStyled>
+        <OrederItemStyled onClick={() => setOpenItem({...order, index})}>
             <ItemName>
                 {order.name}
                 {order.choices3}
@@ -52,7 +52,7 @@ export const OrderListItem = ({order, setOrders, deleteOrderItem}) => {
             </ItemName>
             <ItemPrice>{order.count}</ItemPrice>
             <ItemPrice>{Currency(totalPriceItems(order))}</ItemPrice>
-            <TrashButton onClick={deleteOrderItem} />
+            <TrashButton onClick={() => deleteOrderItem(index)} />
         </OrederItemStyled>
     )
 }

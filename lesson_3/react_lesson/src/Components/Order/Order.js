@@ -48,25 +48,15 @@ const EmptyList = styled.p`
   text-align: center;
 `;
 
-export const Order = ({ orders, setOrders }) => {
+export const Order = ({ orders, setOrders, setOpenItem }) => {
 
     const total = orders.reduce((result, order)=> totalPriceItems(order)+result, 0);
     const totalCounter = orders.reduce((result, order)=> order.count+result, 0);
 
-    function deleteOrderItem(e) {
-        //Plan B: e.target.parentElement.remove();
-        let ulList = e.target.parentElement.parentElement;
-        let clickList = e.target.parentElement;
-        function indexCounter() {
-            for (let i=0; i<ulList.children.length;i++) {
-                if (clickList === ulList.children[i]) {
-                    return i;
-                }
-            }
-        }
-        const index = indexCounter();
-        setOrders(orders.filter(item => item !== orders[index]));
-
+    const deleteOrderItem = index => {
+        const newOrder = orders.filter((item,i) => index !== i);
+        setOrders(newOrder);
+        // setOrders(orders.filter(item => item !== orders[index]));
     }
 
     return (
@@ -76,7 +66,13 @@ export const Order = ({ orders, setOrders }) => {
             <OrderContent>
                 { orders.length ?
                     <OrderList>
-                        {orders.map(item => <OrderListItem deleteOrderItem={deleteOrderItem} order={item}/>)}
+                        {orders.map((order, index) => <OrderListItem
+                            key={index}
+                            order={order}
+                            deleteOrderItem={deleteOrderItem}
+                            index={index}
+                            setOpenItem={setOpenItem}
+                        />)}
                     </OrderList> :
                     <EmptyList>Список заказов пуст</EmptyList>}
             </OrderContent>
