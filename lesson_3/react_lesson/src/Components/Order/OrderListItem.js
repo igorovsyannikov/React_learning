@@ -19,6 +19,7 @@ const OrederItemStyled = styled.li`
     display: flex;
     margin: 15px 0;
     align-items: center;
+    cursor: pointer;
 `;
 const ItemName = styled.span`
     flex-grow: 1;
@@ -40,8 +41,8 @@ export const OrderListItem = ({order, index, deleteOrderItem, setOpenItem }) => 
     const checkedToppings = order.topping2.filter(item => item.checked).map(item => item.name).join(', ')
 
     return (
-        <OrederItemStyled>
-            <ItemName onClick={() => setOpenItem({...order, index})}>
+        <OrederItemStyled onClick={(e) => !e.target.classList.contains('delete') && setOpenItem({...order, index})}>
+            <ItemName>
                 {order.name}
                 {order.choices3}
                 {checkedToppings && <ToppingWrapper>
@@ -51,7 +52,7 @@ export const OrderListItem = ({order, index, deleteOrderItem, setOpenItem }) => 
             </ItemName>
             <ItemPrice>{order.count}</ItemPrice>
             <ItemPrice>{Currency(totalPriceItems(order))}</ItemPrice>
-            <TrashButton onClick={() => deleteOrderItem(index)} />
+            <TrashButton className='delete' onClick={() => deleteOrderItem(index)} />
         </OrederItemStyled>
     )
 }
