@@ -4,6 +4,7 @@ import {ListItem} from './ListItem';
 import {Banner} from './Banner';
 import {useFetch} from '../hooks/useFetch'
 import loaderSrc from '../../image/loader.gif'
+import errorSrc from '../../image/error.png'
 
 const MenuStyled = styled.main`
     background-color: #ccc;
@@ -24,7 +25,11 @@ const Loader = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
+const LoaderImg = styled.img`
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 10px;
+`;
 
 export const Menu = ({setOpenItem}) => {
 
@@ -53,14 +58,19 @@ export const Menu = ({setOpenItem}) => {
                 />
             </SectionMenu>
                 </> : res.error ?
-                    <div>Sorry, we will fix it soon...</div> :
                     <Loader>
                         <div>
-                            <img src={loaderSrc} alt="loader"/>
+                            <LoaderImg src={errorSrc} height="64" width="64" alt="Error"/>
+                            <div>Sorry, we will fix it soon...</div>
+                        </div>
+                    </Loader>
+                    :
+                    <Loader>
+                        <div>
+                            <LoaderImg src={loaderSrc} alt="loader"/>
                             <div>Loading...</div>
                         </div>
                     </Loader>
-
             }
         </MenuStyled>
     )
