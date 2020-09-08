@@ -70,6 +70,7 @@ export const Order = ({ orders, setOrders, setOpenItem, authentificaion, login, 
             email: authentificaion.email,
             order: newOrder
         });
+        setOrders([]);
     }
 
     const total = orders.reduce((result, order)=> totalPriceItems(order)+result, 0);
