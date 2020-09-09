@@ -2,7 +2,7 @@ import React from 'react';
 import styled from  'styled-components';
 import {ListItem} from './ListItem';
 import {Banner} from './Banner';
-import {useFetch} from '../hooks/useFetch'
+// import {useFetch} from '../hooks/useFetch'
 import loaderSrc from '../../image/loader.gif'
 import errorSrc from '../../image/error.png'
 
@@ -31,17 +31,18 @@ const LoaderImg = styled.img`
   padding-bottom: 10px;
 `;
 
-export const Menu = ({setOpenItem}) => {
+export const Menu = ({setOpenItem, dbMenu}) => {
 
-
-    const res = useFetch();
-    const dbMenu = res.response;
+    //
+    // const res = useFetch();
+    // const dbMenu = res.response;
 
 
     return (
         <MenuStyled>
             <Banner/>
-            { res.response ?
+            {/*{ res.response ?*/}
+            { dbMenu ?
                 <>
             <SectionMenu>
                 <h2>Бургеры</h2>
@@ -57,13 +58,14 @@ export const Menu = ({setOpenItem}) => {
                     setOpenItem={setOpenItem}
                 />
             </SectionMenu>
-                </> : res.error ?
-                    <Loader>
-                        <div>
-                            <LoaderImg src={errorSrc} height="64" width="64" alt="Error"/>
-                            <div>Sorry, we will fix it soon...</div>
-                        </div>
-                    </Loader>
+                </>
+                // : res.error ?
+                //     <Loader>
+                //         <div>
+                //             <LoaderImg src={errorSrc} height="64" width="64" alt="Error"/>
+                //             <div>Sorry, we will fix it soon...</div>
+                //         </div>
+                //     </Loader>
                     :
                     <Loader>
                         <div>
