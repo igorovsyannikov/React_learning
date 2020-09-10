@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from  'styled-components';
 import logoImg from '../../image/logo.svg';
-import userIcon from '../../image/sign.svg'
+import userIcon from '../../image/sign.svg';
+import {Context, context} from '../Functions/context';
+
 
 const NavbarStyled = styled.header`
     position: fixed;
@@ -67,8 +69,13 @@ const Figure = styled.figure`
   margin: 0 30px;
 `;
 
-export const NavBar = ({authentificaion, login, logout}) => (
-    <NavbarStyled>
+export const NavBar = () => {
+
+    const {auth :{authentificaion, login, logout}} = useContext(Context);
+
+
+
+    return (    <NavbarStyled>
         <Logo>
             <LogoWrapper>
                 <ImgLogo src={logoImg} alt="logo"/>
@@ -88,5 +95,5 @@ export const NavBar = ({authentificaion, login, logout}) => (
                   <Btn>Войти</Btn>
             </UserWrapper>}
         </Logo>
-    </NavbarStyled>
-)
+    </NavbarStyled>)
+}

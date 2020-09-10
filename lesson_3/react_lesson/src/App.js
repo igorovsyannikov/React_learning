@@ -13,7 +13,7 @@ import { useAuth } from "./Components/hooks/useAuth";
 import { useTitle } from "./Components/hooks/useTitle";
 import { useOrderConfirm } from "./Components/hooks/useOrderConfirm";
 import { OrderConfirm } from "./Components/Order/OrderConfirm";
-
+import { Context } from "./Components/Functions/context";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCOwYpceJPabxP5YV1bRmHsgFYHmXs9ueM",
@@ -37,16 +37,19 @@ function App() {
   useTitle(openItem.openItem);
 
   return (
-    <>
+    <Context.Provider value={{
+        auth,
+        openItem
+    }}>
       <GlobalStyle/>
-      <NavBar {...auth} />
+      <NavBar/>
       <Order
           {...orders}
           {...openItem}
           {...auth}
           {...orderConfirm}
       />
-      <Menu {...openItem}/>
+      <Menu/>
         { openItem.openItem && <ModalItem {...openItem} {...orders}/> }
         { orderConfirm.openOrderConfirm &&
             <OrderConfirm  {...orders} {...auth} {...orderConfirm}
@@ -54,7 +57,7 @@ function App() {
       <div className="App">
         <h1>Hello react</h1>
       </div>
-    </>
+    </Context.Provider>
   );
 }
 
