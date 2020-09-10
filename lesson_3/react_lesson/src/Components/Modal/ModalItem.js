@@ -10,7 +10,7 @@ import {ChoicesFunc} from "./Choces";
 import {useToppings} from "../hooks/useTopping";
 import {useChoices} from "../hooks/useChoices";
 
-const Overlay = styled.div`
+export const Overlay = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;

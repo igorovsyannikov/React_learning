@@ -10,8 +10,9 @@ import { Order } from './Components/Order/Order';
 import { useOpenItem } from "./Components/hooks/useOpenItem";
 import { useOrders} from "./Components/hooks/useOrders";
 import { useAuth } from "./Components/hooks/useAuth";
-import {useTitle} from "./Components/hooks/useTitle";
-
+import { useTitle } from "./Components/hooks/useTitle";
+import { useOrderConfirm } from "./Components/hooks/useOrderConfirm";
+import { OrderConfirm } from "./Components/Order/OrderConfirm";
 
 
 const firebaseConfig = {
@@ -32,6 +33,7 @@ function App() {
   const auth = useAuth(authFirebase);
   const openItem = useOpenItem();
   const orders = useOrders();
+  const orderConfirm = useOrderConfirm();
   useTitle(openItem.openItem);
 
   return (
@@ -42,10 +44,13 @@ function App() {
           {...orders}
           {...openItem}
           {...auth}
-          firebaseDatabase={firebase.database}
+          {...orderConfirm}
       />
       <Menu {...openItem}/>
         { openItem.openItem && <ModalItem {...openItem} {...orders}/> }
+        { orderConfirm.openOrderConfirm &&
+            <OrderConfirm  {...orders} {...auth} {...orderConfirm}
+                firebaseDatabase={firebase.database}/>}
       <div className="App">
         <h1>Hello react</h1>
       </div>
