@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from  'styled-components';
 import {ButtonCheckout} from '../Button';
 import {OrderListItem} from './OrderListItem';
@@ -7,6 +7,7 @@ import {Currency} from '../Functions/secondaryFunctions';
 import {OrderTitle} from "../Style/StyledComponents";
 import {Total} from "../Style/StyledComponents";
 import {TotalPrice} from "../Style/StyledComponents";
+import {Context} from "../Functions/context";
 
 const OrderStyled = styled.section`
     position: fixed;
@@ -40,15 +41,9 @@ const EmptyList = styled.p`
 
 
 
-export const Order = ({
-                          orders,
-                          setOrders,
-                          setOpenItem,
-                          authentificaion,
-                          login,
-                          setOpenOrderConfirm
-                        }) => {
+export const Order = () => {
 
+    const {openItem: {setOpenItem}, orders :{orders, setOrders}, auth :{authentificaion, login}, orderConfirm: {setOpenOrderConfirm}} = useContext(Context);
 
     const total = orders.reduce((result, order)=> totalPriceItems(order)+result, 0);
     const totalCounter = orders.reduce((result, order)=> order.count+result, 0);

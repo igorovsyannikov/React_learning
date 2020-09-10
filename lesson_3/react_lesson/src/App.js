@@ -28,7 +28,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 function App() {
-
   const authFirebase = firebase.auth;
   const auth = useAuth(authFirebase);
   const openItem = useOpenItem();
@@ -39,20 +38,17 @@ function App() {
   return (
     <Context.Provider value={{
         auth,
-        openItem
+        openItem,
+        orders,
+        orderConfirm,
     }}>
       <GlobalStyle/>
       <NavBar/>
-      <Order
-          {...orders}
-          {...openItem}
-          {...auth}
-          {...orderConfirm}
-      />
+      <Order/>
       <Menu/>
-        { openItem.openItem && <ModalItem {...openItem} {...orders}/> }
+        { openItem.openItem && <ModalItem/> }
         { orderConfirm.openOrderConfirm &&
-            <OrderConfirm  {...orders} {...auth} {...orderConfirm}
+            <OrderConfirm
                 firebaseDatabase={firebase.database}/>}
       <div className="App">
         <h1>Hello react</h1>

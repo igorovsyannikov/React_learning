@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from  'styled-components';
 import {Overlay} from "../Style/StyledComponents";
 import { OrderTitle } from '../Style/StyledComponents';
@@ -8,6 +8,7 @@ import {ButtonCheckout} from '../Button';
 import {projection} from '../Functions/secondaryFunctions';
 import {totalPriceItems} from '../Functions/secondaryFunctions';
 import {Currency} from '../Functions/secondaryFunctions';
+import {Context} from "../Functions/context";
 
 
 const rulesData = {
@@ -39,13 +40,10 @@ const Text = styled.h3`
 `;
 
 
-export const OrderConfirm = ({
-    orders,
-    setOrders,
-    authentificaion,
-    setOpenOrderConfirm,
-    firebaseDatabase
-                             }) => {
+export const OrderConfirm = ({firebaseDatabase}) => {
+
+    const {orders :{orders, setOrders}, auth :{authentificaion}, orderConfirm: {setOpenOrderConfirm}} = useContext(Context);
+
     const dataBase = firebaseDatabase();
     const total = orders.reduce((result, order)=> totalPriceItems(order)+result, 0);
 
