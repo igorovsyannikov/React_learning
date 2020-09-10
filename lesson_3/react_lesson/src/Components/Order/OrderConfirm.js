@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from  'styled-components';
-import { Overlay } from '../Modal/ModalItem'
-import { OrderTitle } from '../Order/Order';
-import { Total } from '../Order/Order';
-import { TotalPrice } from '../Order/Order';
+import {Overlay} from "../Style/StyledComponents";
+import { OrderTitle } from '../Style/StyledComponents';
+import { Total } from "../Style/StyledComponents";
+import {TotalPrice} from "../Style/StyledComponents";
 import {ButtonCheckout} from '../Button';
 import {projection} from '../Functions/secondaryFunctions';
 import {totalPriceItems} from '../Functions/secondaryFunctions';

@@ -9,20 +9,9 @@ import {Toppings} from "./Toppings";
 import {ChoicesFunc} from "./Choces";
 import {useToppings} from "../hooks/useTopping";
 import {useChoices} from "../hooks/useChoices";
+import {Overlay} from "../Style/StyledComponents";
 
-export const Overlay = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,.5);
-    z-index: 90;
 
-`;
 const Modal = styled.div`
     background-color: #fff;
     width: 600px;

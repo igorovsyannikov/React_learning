@@ -4,8 +4,9 @@ import {ButtonCheckout} from '../Button';
 import {OrderListItem} from './OrderListItem';
 import {totalPriceItems} from '../Functions/secondaryFunctions';
 import {Currency} from '../Functions/secondaryFunctions';
-
-
+import {OrderTitle} from "../Style/StyledComponents";
+import {Total} from "../Style/StyledComponents";
+import {TotalPrice} from "../Style/StyledComponents";
 
 const OrderStyled = styled.section`
     position: fixed;
@@ -20,26 +21,13 @@ const OrderStyled = styled.section`
     flex-direction: column;
     z-index: 90;
 `;
-export const OrderTitle = styled.h2`
-    text-align: center;
 
-`;
 const OrderContent = styled.div`
     flex-grow: 1;
 `;
 const OrderList = styled.ul``;
-export const Total = styled.div`
-    display: flex;
-    margin: 0 30px 30px;
-    & span:first-child {
-        flex-grow: 1;
-    }
-`;
-export const TotalPrice = styled.span`
-    text-align: right;
-    min-width: 65px;
-    margin-left: 20px;
-`;
+
+
 const OrderStatus = styled.span`
     font-family: Roboto, sans-serif;
     font-size: 21px;
@@ -88,19 +76,25 @@ export const Order = ({
                     </OrderList> :
                     <EmptyList>Список заказов пуст</EmptyList>}
             </OrderContent>
-            <Total>
-                <span>Итого</span>
-                <span>{totalCounter}</span>
-                <TotalPrice>{Currency(total)}</TotalPrice>
-            </Total>
-            <ButtonCheckout onClick={() => {
-                if (authentificaion) {
-                    setOpenOrderConfirm(true);
-                }
-                else {
-                    login();
-                }
-            }}>ОФОРМИТЬ</ButtonCheckout>
+            {
+            orders.length ?
+            <div>
+                <Total>
+                    <span>Итого</span>
+                    <span>{totalCounter}</span>
+                    <TotalPrice>{Currency(total)}</TotalPrice>
+                </Total>
+                <ButtonCheckout onClick={() => {
+                    if (authentificaion) {
+                        setOpenOrderConfirm(true);
+                    } else {
+                        login();
+                    }
+                }}>ОФОРМИТЬ</ButtonCheckout>
+            </div>
+                :
+                <div></div>
+            }
         </OrderStyled>
     )
 }
